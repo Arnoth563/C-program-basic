@@ -7,6 +7,36 @@ char student_no[25];
 char gender[10];
 int marks;
 };
+void SaveStudent(struct student *stud, int size) {
+FILE*file;
+
+if(stud==NULL || size<=0) {
+printf("No student records available to save.\n");
+return;
+}
+file=fopen("initial.dat", "wb");
+
+if(file==NULL) {
+printf("failed to open file for writting.\n");
+return;
+}
+
+if(fwrite(&size, sizeof(int), 1, file)!=1) {
+printf("Failed to save size information.\n");
+fclose(file);
+return;
+}
+
+if(fwrite(stud, sizeof(struct student), size, file)!=size) {
+printf("Failed student records in the file.\n");
+fclose(file);
+return;
+}
+
+fclose(file);
+printf("\n---------\nData successfull saved\n==========\n");
+return;
+}
 
 void PrintStudent(struct student *stud, int position) {
 
@@ -588,37 +618,7 @@ printf("Mode marks: %d\n", mode);
 printf("<<<<<>>>>>>>>>>>\n");
 
 }
-//Function 8: SaveStudentFile()
-void SaveStudent(struct student *stud, int size) {
-FILE*file;
 
-if(stud==NULL || size<=0) {
-printf("No student records available to save.\n");
-return;
-}
-file=fopen("initial.dat", "wb");
-
-if(file==NULL) {
-printf("failed to open file for writting.\n");
-return;
-}
-
-if(fwrite(&size, sizeof(int), 1, file)!=1) {
-printf("Failed to save size information.\n");
-fclose(file);
-return;
-}
-
-if(fwrite(stud, sizeof(struct student), size, file)!=size) {
-printf("Failed student records in the file.\n");
-fclose(file);
-return;
-}
-
-fclose(file);
-printf("\n---------\nData successfull saved\n==========\n");
-return;
-}
 // Function 9: LoadFromFile(struct *stud, int *size)
 struct student *LoadFromFile(struct student *stud, int *size) {
 
