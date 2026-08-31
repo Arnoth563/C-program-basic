@@ -152,7 +152,7 @@ printf("\n");
 //Function 3: AddMoreStudent()
 
 struct student *AddMoreStudent(struct student *stud, int *size) {
-int i, extra;
+int extra;
 printf("How many student do you want to add? ");
 if(scanf("%d", &extra)!=1) {
 printf("Invalid input please try again.\n");
@@ -283,7 +283,6 @@ return;
 }
 
 do{
-choice=0;
 found=0;
 printf("\n<><><><><><><><\n");
 printf("Search student by the details below.\n");
